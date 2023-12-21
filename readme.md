@@ -1,4 +1,7 @@
 # Genie Reactive Map
+
+**This demo app has been created by [Optomatica](https://optomatica.com/), find the original repository [here](https://github.com/Optomatica/genie-reactive-map)**
+
 ## Description
 This is a simple app that visualizes geographical data build on the top of GenieFramework, PlotlyBase, DataFrames, and mapbox.
 
