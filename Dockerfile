@@ -6,7 +6,7 @@ COPY . /home/genie/app/
 WORKDIR /home/genie/app
 RUN chown -R genie:genie /home/
 USER genie
-RUN julia -e "using Pkg; Pkg.activate(\".\"); Pkg.develop(url=\"./GenieAI/\");"
+RUN julia -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate();"
 EXPOSE 8000
 EXPOSE 80
 ENV JULIA_DEPOT_PATH "/home/genie/.julia"
