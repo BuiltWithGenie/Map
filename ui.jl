@@ -44,12 +44,12 @@ StippleUI.layout(
         page_container(
             [
             plot(:trace, layout=:layout, config=:config, configtype=ConfigType, class="window-height"),
-            Genie.Renderer.Html.div(
-                [
-                    itemsection(btn(; dense=true, flat=true, round=true, icon="arrow_right", @click(:animate)); avatar=true, @showif("!animate")),
-                    itemsection(btn(; dense=true, flat=true, round=true, icon="pause", @click("animate = false")); avatar=true, @showif(:animate)),
-                    itemsection(range("min_year":1:"max_year", :filter_range, label=true, color="blue", labelalways=true)),
-                ], style="position: fixed; bottom: 0; right: 0; padding: 12px 40px; background-color: transparent; width: 80%; display: flex; "),
+            #= Genie.Renderer.Html.div( =#
+            #=     [ =#
+            #=         itemsection(btn(; dense=true, flat=true, round=true, icon="arrow_right", @click(:animate)); avatar=true, @showif("!animate")), =#
+            #=         itemsection(btn(; dense=true, flat=true, round=true, icon="pause", @click("animate = false")); avatar=true, @showif(:animate)), =#
+            #=         itemsection(range("min_year":1:"max_year", :filter_range, label=true, color="blue", labelalways=true)), =#
+            #=     ], style="position: fixed; bottom: 0; right: 0; padding: 12px 40px; background-color: transparent; width: 80%; display: flex; "), =#
         ]
         ),
     ],
