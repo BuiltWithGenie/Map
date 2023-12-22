@@ -1,5 +1,6 @@
 using PlotlyBase
 using GenieFramework
+
 using DataFrames
 using CSV
 include("./constants.jl")
@@ -7,6 +8,8 @@ include("./utils.jl")
 using .Constants: current_year, ScatterModel, LayoutModel, COLOR_SCALE_OPTIONS, ConfigType, MAPBOX_STYLES, DataModel, SampleDataModel
 using .Utils: scale_array, map_fields
 @genietools
+
+const LOAD_ROWS = 1000
 
 @app begin
   @in left_drawer_open = true
@@ -16,7 +19,7 @@ using .Utils: scale_array, map_fields
   @in color_scale = "Blues"
   @in animate = false
   @in mapbox_style = "open-street-map"
-  @out data_input = DataTable()
+  @out data_input = DataFrame()
 
   @mixin data::DataModel
   @mixin ScatterModel
@@ -172,7 +175,7 @@ using .Utils: scale_array, map_fields
 
   @onbutton confirm_choose_sample_data begin
     show_sample_data_dialog = false
-    df = CSV.read(choosen_sample_data, DataFrame) |> map_fields
+    df = CSV.read(choosen_sample_data, DataFrame, limit=LOAD_ROWS) |> map_fields
     data_input = DataTable(df, DataTableOptions(columns=map(col -> Column(col), names(df))))
     @show "data loaded!"
   end
@@ -184,14 +187,3 @@ end
 
 
 @page("/", "ui.jl")
-
-# this route should not work anymore since the global model is gone
-route("/", method=POST) do
-  files = Genie.Requests.filespayload()
-  f = first(files)
-  df = CSV.read(f[2].data, DataFrame) |> map_fields
-  model.data_input[] = DataTable(df, DataTableOptions(columns=map(col -> Column(col), names(df))))
-  return "Perfecto!"
-end
-    
-

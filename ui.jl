@@ -8,8 +8,8 @@ StippleUI.layout(
         ),
         ),
         drawer(
-            Html.div(class="q-pa-md", [uploader(label="Upload Dataset", accept=".csv", method="POST", url="http://127.0.0.1:8000/", @on(:uploaded, :uploaded), style="width:100%"),
-                # item([itemsection(p("Marker color")), itemsection(input(type="color", var"v-model"=:selected_color, label="Color"))]),
+             Html.div(class="q-pa-md", [
+            #=uploader(label="Upload Dataset", accept=".csv", method="POST", url="http://127.0.0.1:8000/", @on(:uploaded, :uploaded), style="width:100%"), =# # uncomment to enable upload box
                 item(Genie.Renderer.Html.select(:selected_color_feature, clearable=true, options=:features, label="Color based on", useinput=true)),
                 item(Genie.Renderer.Html.select(:color_scale, options=:color_scale_options, label="Color Scale", useinput=true, @showif("selected_color_feature"))),
                 item(Genie.Renderer.Html.select(:selected_size_feature, clearable=true, options=:features, label="Size based on", useinput=true)),
